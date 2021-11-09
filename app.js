@@ -1,43 +1,43 @@
+const results = {}
+
 function computerPlay() {
   return Math.floor(Math.random() * 3) // 0, 1 or 2
 }
 
-function getUserInput() {
+function getUserInput(input) {
   selectionToN = {
     'rock': 0,
     'paper': 1,
     'scissors': 2
   }
-  return selectionToN[prompt("Enter selection").toLowerCase()]
+  return selectionToN[input.toLowerCase()]
 }
 
-function playRound() {
+function playRound(playerSelection) {
   computerSelection = computerPlay()
-  playerSelection = getUserInput()
+  playerSelection = getUserInput(playerSelection)
 
   if ((playerSelection + 1) % 3 === computerSelection) {
-    return 'Player won'
+    return 'player'
   } else if (playerSelection === computerSelection) {
-    return 'Tie'
+    return 'tie'
   } else {
-    return 'Computer won'
+    return 'computer'
   }
 }
 
-function game() {
-  const results = {}
-  for (let index = 0; index < 5; index++) {
-    result = playRound()
-    results[result] = (results[result] ?? 0) + 1
-
-    console.log(`Round result: ${result}`)
-  }
-  return (
-  "Game result: " +
-  _.chain(Object.entries(results))
-  .sortBy(([key, value]) => value)
-  .reverse()
-  .value()
-  .filter(winner => winner != 'Tie')[0][0]
-  )
+function updateDOMScore() {
+  const scores = document.querySelectorAll('.score')
+  scores.forEach((score) => {
+    score.textContent = results[score.id] ?? 0;
+  });
 }
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    roundResult = playRound(button.id);
+    results[roundResult] = (results[roundResult] ?? 0) + 1;
+    updateDOMScore();
+  });
+});

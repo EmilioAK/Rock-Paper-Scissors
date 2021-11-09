@@ -5,9 +5,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock Paper Scissors</title>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
+  <script src="app.js" defer></script>
+  <style>
+    body {
+      margin: 0%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .counters {
+      display: flex;
+      gap: 3em;
+    }
+  </style>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-  <script src="app.js"></script>
+  <div class="container">
+    <div class="counters">
+      <h5>Player wins: <span id="player" class="score">0</span></h5>
+      <h5>Computer wins: <span id="computer" class="score">0</span></h5>
+      <h5>Ties: <span id="tie" class="score">0</span></h5>
+    </div>
+    <div class="buttons">
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
+    </div>
+  </div>
 </body>
 </html>
